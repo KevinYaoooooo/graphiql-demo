@@ -1,20 +1,18 @@
 {
-  "name": "graphiql-js-next-example",
+  "name": "graphiql",
   "version": "1.0.0",
-  "description": "using latest CRA aka react-scripts with javascript",
+  "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "graphiql": "latest",
-    "graphql": "latest",
-    "prop-types": "15.7.2",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-scripts": "^3.4.1"
+    "graphiql": "0.12.0",
+    "graphql": "14.0.2",
+    "isomorphic-fetch": "2.2.1",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
+    "react-scripts": "2.0.3"
   },
-  "devDependencies": {
-    "typescript": "3.3.3"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
