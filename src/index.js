@@ -1,63 +1,28 @@
-import * as React from "react";
-import { render } from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import GraphiQL from "graphiql";
-import jsonData from "./demo.json";
-import { buildFromClient } from "graphql";
-
-import "graphiql/graphiql.min.css";
+import fetch from "isomorphic-fetch";
+import jsonData from "./schema.json";
 
 import "./styles.css";
 
-const URL = "https://swapi-graphql.netlify.app/.netlify/functions/index";
+const url = "https://swapi-graphql.netlify.app/.netlify/functions/index";
 
 function graphQLFetcher(graphQLParams) {
-  return fetch(URL, {
+  return fetch(url, {
     method: "post",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(graphQLParams),
-    credentials: "omit"
-  }).then((response) => response.json());
+    body: JSON.stringify(graphQLParams)
+  }).then((response) => jsonData);
 }
 
-const container = document.getElementById("root");
-
-const defaultQuery = `
-query ExampleQuery {
-  data: allFilms {
-    edges {
-      node {
-        id
-        title
-        producers
-        episodeID
-        created
-      }
-    }
-  }
-}
-`;
-
-const App = () => {
-  const [value, setValue] = React.useState(null);
-  React.useEffect(() => {
-    setTimeout(() => {
-      setValue("something");
-    }, 1000);
-  }, []);
-
+function App() {
   return (
-    <div id="wrapper">
-      {value ? (
-        <GraphiQL
-          schema={buildFromClient(jsonData)}
-          fetcher={graphQLFetcher}
-          defaultQuery={defaultQuery}
-          variables={null}
-        />
-      ) : null}
-      ,
+    <div className="App">
+      <GraphiQL fetcher={graphQLFetcher} />
     </div>
   );
-};
+}
 
-render(<App />, container);
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
